@@ -1,0 +1,1 @@
+Can(5) is INVALID because the weights available for download are CORRUPTED! The estimator will not even run with these weights!
