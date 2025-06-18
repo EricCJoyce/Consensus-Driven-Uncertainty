@@ -1,0 +1,35 @@
+#  Test set for an ensemble grasp-success predictor.
+#  Created 11:36AM EDT on Oct 03, 2024
+#    python3 partition_datasets.py -principal EPOS -object YCBV8 -gripper par -train 0.8 -shuffle -mode t3r3 -v
+#  PRINCIPAL ESTIMATOR:
+#    EPOS
+#  SUPPORT ESTIMATOR(S):
+#    {GDRNPP, ZebraPose}
+#  OBJECT:
+#    YCBV8
+#  DATASET(S):
+#    {YCBV, LMO}
+#  GRIPPER:
+#    Parallel
+#  MODE:
+#    t3r3
+#
+#  Indices refer to a single NumPy file, "dataset-EPOS-t3r3.npz", that contains all support estimators' differences against the principal.
+#
+#  LINE FORMAT
+#  Dataset <t> Scene <t> Frame <t> Object-ID <t> Visibility <t> Idx.diff.EPOS-GDRNPP <t> Idx.diff.EPOS-ZebraPose <t> Success(EPOS)
+YCBV	58	576	8	1.0	5666	5667	1
+YCBV	58	154	8	1.0	5610	5611	1
+YCBV	58	163	8	1.0	5614	5615	1
+YCBV	58	1177	8	1.0	5806	5807	1
+YCBV	58	1146	8	1.0	5794	5795	1
+YCBV	58	1072	8	0.9107701941139636	5762	5763	1
+YCBV	58	1051	8	0.9176686041882316	5754	5755	1
+YCBV	58	94	8	1.0	5570	5571	1
+YCBV	58	1113	8	1.0	5782	5783	1
+YCBV	58	444	8	0.9994441871236683	5626	5627	1
+YCBV	58	1639	8	1.0	5842	5843	1
+YCBV	58	583	8	1.0	5670	5671	1
+YCBV	58	655	8	0.9996173347364393	5714	5715	1
+YCBV	58	596	8	0.9995254365983295	5678	5679	1
+YCBV	58	102	8	1.0	5574	5575	0
