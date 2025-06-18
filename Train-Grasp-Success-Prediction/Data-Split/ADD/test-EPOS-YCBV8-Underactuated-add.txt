@@ -1,0 +1,35 @@
+#  Test set for an ensemble grasp-success predictor.
+#  Created 11:37AM EDT on Oct 03, 2024
+#    python3 partition_datasets.py -principal EPOS -object YCBV8 -gripper und -train 0.8 -shuffle -mode add -v
+#  PRINCIPAL ESTIMATOR:
+#    EPOS
+#  SUPPORT ESTIMATOR(S):
+#    {GDRNPP, ZebraPose}
+#  OBJECT:
+#    YCBV8
+#  DATASET(S):
+#    {YCBV, LMO}
+#  GRIPPER:
+#    Underactuated
+#  MODE:
+#    add
+#
+#  Indices refer to a single NumPy file, "dataset-EPOS-add.npz", that contains all support estimators' differences against the principal.
+#
+#  LINE FORMAT
+#  Dataset <t> Scene <t> Frame <t> Object-ID <t> Visibility <t> Idx.diff.EPOS-GDRNPP <t> Idx.diff.EPOS-ZebraPose <t> Success(EPOS)
+YCBV	58	596	8	0.9995254365983295	5678	5679	1
+YCBV	58	1549	8	1.0	5826	5827	1
+YCBV	58	1672	8	1.0	5850	5851	1
+YCBV	58	1167	8	1.0	5802	5803	1
+YCBV	58	603	8	1.0	5682	5683	1
+YCBV	58	1097	8	0.9549715690794529	5778	5779	1
+YCBV	58	1669	8	1.0	5846	5847	1
+YCBV	58	1068	8	0.9018885667267456	5758	5759	1
+YCBV	58	163	8	1.0	5614	5615	1
+YCBV	58	655	8	0.9996173347364393	5714	5715	1
+YCBV	58	114	8	1.0	5586	5587	1
+YCBV	58	1036	8	0.8655078500480615	5750	5751	1
+YCBV	58	691	8	0.9983971336979068	5734	5735	1
+YCBV	58	1529	8	1.0	5822	5823	1
+YCBV	58	77	8	1.0	5562	5563	0
