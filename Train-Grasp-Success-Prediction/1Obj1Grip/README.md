@@ -1,5 +1,6 @@
-# Experiment (t3r3)
+# Experiment 2(t3r3)
 ```
+EXPERIMENT_NUMBER=2
 MODE='t3r3'
 EPOCHS=3000
 SCHED='cos'
