@@ -3,7 +3,7 @@
 
 Eric C. Joyce, Qianwen Zhao, Nathaniel Burgdorfer, Long Wang, Philippos Mordohai
 
-Accepted to IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS) 2025
+Accepted to **IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS) 2025**
 
 [![IMAGE ALT TEXT HERE](https://www.ericjoycefilm.com/reel/_2024/consensus-driven-uncertainty/obj/img/poster.jpg)](https://www.ericjoycefilm.com/reel/_2024/consensus-driven-uncertainty/)
 
