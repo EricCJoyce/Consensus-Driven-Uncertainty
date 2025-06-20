@@ -3,16 +3,16 @@
 
 Eric C. Joyce, Qianwen Zhao, Nathaniel Burgdorfer, Long Wang, Philippos Mordohai
 
-Accepted to **IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS) 2025**
+Accepted to [**IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS) 2025**](https://www.iros25.org/)
 
-[![IMAGE ALT TEXT HERE](https://www.ericjoycefilm.com/reel/_2024/consensus-driven-uncertainty/obj/img/poster.jpg)](https://www.ericjoycefilm.com/reel/_2024/consensus-driven-uncertainty/)
+[![Video poster](https://www.ericjoycefilm.com/reel/_2024/consensus-driven-uncertainty/obj/img/poster.jpg)](https://www.ericjoycefilm.com/reel/_2024/consensus-driven-uncertainty/)
 
 ## Predict 6-DoF Object Poses from an RGB Image
 The directory `Pose-Estimators` contains instructions and resources for running the three pose-estimators used in our study.
 
 Alternatively, you can use pre-computed pose estimates found in `Pose-Estimates`. Notice that this folder contains more data than was used to train our networks.
 
-`BOP-Metrics` contains pose-estimate measurements. Mnay of these are defined by the BOP Benchmark. This folder also contains metrics for pose-estimators that do not appear in the paper.
+`BOP-Metrics` contains pose-estimate measurements. Many of these are defined by the BOP Benchmark. This folder also contains metrics for pose-estimators that do not appear in the paper.
 
 ## Conduct Grasping Trials in a Physics Simulator
 The directories `Parallel-Gripper` and `Underactuated-Gripper` contain the results of grasping trials conducted in simulaation using the parallel and underactuated effectors, respectively.
