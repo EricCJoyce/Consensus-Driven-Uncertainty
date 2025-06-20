@@ -7,3 +7,8 @@ Accepted to IEEE/RSJ International Conference on Intelligent Robots and Systems 
 
 Predict grasp success before a robotic grasp is attempted.
 
+## Predict 6-DoF Object Poses from an RGB Image
+
+## Conduct Grasping Trials in a Physics Simulator
+
+## Train a Deep Network to Predict Grasp Success
