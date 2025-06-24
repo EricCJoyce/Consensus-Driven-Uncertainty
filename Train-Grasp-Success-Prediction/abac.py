@@ -20,7 +20,7 @@ def main():
 	principal_supp_combos = [params['principal'] + '-' + x for x in params['support']]
 
 	timestamp_str = time.strftime('%l:%M%p %Z on %b %d, %Y')
-	dataset_source_armed = False
+	dataset_source_armed = False									#  Trigger indicating whether we have begun reading source datasets.
 	fh = open('dataset-'+params['principal']+'.txt', 'r')
 	for line in fh.readlines():
 		if '#  Made from the following DATASETS:' in line:
