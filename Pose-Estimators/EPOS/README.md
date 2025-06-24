@@ -185,8 +185,8 @@ Run the script. (It should run when you reactivate the environment, but... meh.)
 ```
 
 Create directories:
-- `/media/eric/Hoboken/Projects/Uncertainty for 6DoF Pose Est/Models/EPOS/tf_data`
-- `/media/eric/Hoboken/Projects/Uncertainty for 6DoF Pose Est/Models/EPOS/tf_models`
+- `/media/eric/Hoboken/Projects/Consensus_Driven_Uncertainty/Models/EPOS/tf_data`
+- `/media/eric/Hoboken/Projects/Consensus_Driven_Uncertainty/Models/EPOS/tf_models`
 
 ### Clone the EPOS repository
 `git clone --recurse-submodules https://github.com/thodan/epos.git`
@@ -239,7 +239,7 @@ Download pre-trained weights for the various BOP datasets:
 
 Likewise for all the other datasets.
 
-Unzip these into `/media/eric/Hoboken/Projects/Uncertainty for 6DoF Pose Est/Models/EPOS/tf_models
+Unzip these into `/media/eric/Hoboken/Projects/Consensus_Driven_Uncertainty/Models/EPOS/tf_models
 ` such that:
 ```
 /tf_models
@@ -274,7 +274,7 @@ Likewise for all the other datasets.
 All your work should be done from the directory `EPOS/epos/scripts/`.
 
 ### Build a TFRecord for every set you intend to test
-Note: you will have to "hide" any directories that will confuse the collection script. It traverses the split directory on the assumption that everythin within has a numeric name.
+Note: you will have to "hide" any directories that will confuse the collection script. It traverses the split directory on the assumption that everything within has a numeric name.
 ```
 python3 create_example_list.py --dataset=lmo --split=test
 ```
