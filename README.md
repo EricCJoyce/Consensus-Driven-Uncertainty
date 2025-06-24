@@ -10,12 +10,12 @@ Accepted to [**IEEE/RSJ International Conference on Intelligent Robots and Syste
 ## Predict 6-DoF Object Poses from an RGB Image
 The directory `Pose-Estimators` contains instructions and resources for running the three pose-estimators used in our study.
 
-Alternatively, you can use pre-computed pose estimates found in `Pose-Estimates`. Notice that this folder contains more data than was used to train our networks.
+Alternatively, you can use pre-computed pose estimates found in `Pose-Estimates`.
 
 `BOP-Metrics` contains pose-estimate measurements. Many of these are defined by the BOP Benchmark. This folder also contains metrics for pose-estimators that do not appear in the paper.
 
 ## Conduct Grasping Trials in a Physics Simulator
-The directories `Parallel-Gripper` and `Underactuated-Gripper` contain the results of grasping trials conducted in simulaation using the parallel and underactuated effectors, respectively.
+The directories `Parallel-Gripper` and `Underactuated-Gripper` contain the results of grasping trials conducted in simulation using the parallel and underactuated effectors, respectively.
 
 ## Train a Deep Network to Predict Grasp Success
 `Train-Grasp-Success-Prediction` contains the resources necessary to train grasp success-prediction networks according to our method. The data split and baseline used in our study can also be reproduced.
