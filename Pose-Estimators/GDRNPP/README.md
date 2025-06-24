@@ -108,32 +108,10 @@ Download pre-computed test-set bounding boxes from the authors' [OneDrive](https
 ```
 /BOP_DATASETS
   |
-  +--hb
-  |   \--test
-  |       \--test_bboxes
-  |           \--yolox_x_640_hb_pbr_hb_test_primesense_bop19.json
-  +--icbin
-  |   \--test
-  |       \--test_bboxes
-  |           \--yolox_x_640_icbin_pbr_icbin_bop_test.json
-  +--itodd
-  |   \--test
-  |       \--test_bboxes
-  |           \--yolox_x_640_itodd_pbr_itodd_bop_test.json
   +--lmo
   |   \--test
   |       \--test_bboxes
   |           \--yolox_x_640_lmo_pbr_lmo_bop_test.json
-  +--tless
-  |   \--test
-  |       \--test_bboxes
-  |           +--yolox_x_640_tless_pbr_tless_bop_test.json
-  |           \--yolox_x_640_tless_real_pbr_tless_bop_test.json
-  +--tudl
-  |   \--test
-  |       \--test_bboxes
-  |           +--yolox_x_640_tudl_pbr_tudl_bop_test.json
-  |           \--yolox_x_640_tudl_real_pbr_tudl_bop_test.json
   \--ycbv
       \--test
           \--test_bboxes
@@ -145,45 +123,6 @@ These pre-computed bounding boxes need to be integrated with your system's exist
 ```
 /media/eric/Hoboken/Projects/Consensus_Driven_Uncertainty/Datasets/BOP
   |
-  +--hb
-  |   +--models
-  |   +--models_eval
-  |   +--test_kinect
-  |   +--test_primesense
-  |   |   \--test_bboxes
-  |   |       \--yolox_x_640_hb_pbr_hb_test_primesense_bop19.json
-  |   +--train_pbr
-  |   +--val_kinect
-  |   +--val_primesense
-  |   +--camera_kinect.json
-  |   +--camera_primesense.json
-  |   +--dataset_info.md
-  |   \--test_targets_bop19.json
-  +--hope
-  +--icbin
-  |   +--models
-  |   +--models_eval
-  |   +--test
-  |   |   \--test_bboxes
-  |   |       \--yolox_x_640_icbin_pbr_icbin_bop_test.json
-  |   +--train
-  |   +--train_pbr
-  |   +--camera.json
-  |   +--dataset_info.md
-  |   \--test_targets_bop19.json
-  +--icmi
-  +--itodd
-  |   +--models
-  |   +--models_eval
-  |   +--test
-  |   |   \--test_bboxes
-  |   |       \--yolox_x_640_itodd_pbr_itodd_bop_test.json
-  |   +--train_pbr
-  |   +--val
-  |   +--camera.json
-  |   +--dataset_info.md
-  |   \--test_targets_bop19.json
-  +--lm
   +--lmo
   |   +--models
   |   +--models_eval
@@ -194,37 +133,6 @@ These pre-computed bounding boxes need to be integrated with your system's exist
   |   +--camera.json
   |   +--dataset_info.md
   |   \--test_targets_bop19.json
-  +--ruapc
-  +--tless
-  |   +--models
-  |   +--models_cad
-  |   +--models_eval
-  |   +--models_reconst
-  |   +--test_primesense_bop
-  |   |   \--test_bboxes
-  |   |       +--yolox_x_640_tless_pbr_tless_bop_test.json
-  |   |       \--yolox_x_640_tless_real_pbr_tless_bop_test.json
-  |   +--train_pbr
-  |   +--train_primesense
-  |   +--train_render_reconst
-  |   +--camera_primesense.json
-  |   +--dataset_info.md
-  |   +--test_targets_bop18.json
-  |   \--test_targets_bop19.json
-  +--tudl
-  |   +--models
-  |   +--models_eval
-  |   +--test
-  |   |   \--test_bboxes
-  |   |       +--yolox_x_640_tudl_pbr_tudl_bop_test.json
-  |   |       \--yolox_x_640_tudl_real_pbr_tudl_bop_test.json
-  |   +--train_pbr
-  |   +--train_real
-  |   +--train_render
-  |   +--camera.json
-  |   +--dataset_info.md
-  |   \--test_targets_bop19.json
-  +--tyol
   \--ycbv
       +--models
       +--models_eval
@@ -248,20 +156,8 @@ Download the pre-trained GDR-Net models in `gdrn.zip` from [OneDrive](https://ma
 ```
 gdrn
   |
-  +--hb_pbr
-  +--hbPbrSO
-  +--icbin_pbr
-  +--icbinPbrSO
-  +--itodd_pbr
-  +--itoddPbrSO
   +--lmo_pbr
   +--lmoPbrSO
-  +--tless
-  +--tlessPbrSO
-  +--tlessSO
-  +--tudl
-  +--tudlPbrSO
-  +--tudlSO
   +--ycbv
   +--ycbvPbrSO
   \--ycbvSO
@@ -330,79 +226,6 @@ sudo docker exec -it gdrnpp-test bash           #  Enter the container.
   output/gdrn/ycbv/convnext_a6_AugCosyAAEGray_BG05_mlL1_DMask_amodalClipBox_classAware_ycbv/model_final_wo_optim.pth
 ```
 
-### HB
-```
-sudo docker run --rm --shm-size=10gb --runtime=nvidia --gpus all -dit --name gdrnpp-test --mount type=bind,source=/media/eric/Hoboken/Projects/Consensus_Driven_Uncertainty/Datasets/BOP,target=/home/gdrnpp_bop2022/datasets/BOP_DATASETS --mount type=bind,source=/media/eric/Hoboken/Projects/Consensus_Driven_Uncertainty/Models/GDRNPP,target=/home/gdrnpp_bop2022/output/gdrn gdrnpp
-sudo docker exec -it gdrnpp-test bash
-
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/hb_pbr/convnext_a6_AugCosyAAEGray_BG05_mlL1_DMask_amodalClipBox_classAware_hb.py 0 output/gdrn/hb_pbr/convnext_a6_AugCosyAAEGray_BG05_mlL1_DMask_amodalClipBox_classAware_hb/model_final_wo_optim.pth
-
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/hbPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_hb/01_bear.py 0 output/gdrn/hbPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_hb/01_bear/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/hbPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_hb/03_round_car.py 0 output/gdrn/hbPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_hb/03_round_car/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/hbPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_hb/04_thin_cow.py 0 output/gdrn/hbPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_hb/04_thin_cow/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/hbPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_hb/08_green_rabbit.py 0 output/gdrn/hbPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_hb/08_green_rabbit/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/hbPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_hb/09_holepuncher.py 0 output/gdrn/hbPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_hb/09_holepuncher/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/hbPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_hb/10.py 0 output/gdrn/hbPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_hb/10/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/hbPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_hb/12.py 0 output/gdrn/hbPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_hb/12/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/hbPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_hb/15.py 0 output/gdrn/hbPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_hb/15/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/hbPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_hb/17.py 0 output/gdrn/hbPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_hb/17/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/hbPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_hb/18_jaffa_cakes_box.py 0 output/gdrn/hbPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_hb/18_jaffa_cakes_box/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/hbPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_hb/19_minions.py 0 output/gdrn/hbPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_hb/19_minions/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/hbPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_hb/22_rhinoceros.py 0 output/gdrn/hbPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_hb/22_rhinoceros/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/hbPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_hb/23_dog.py 0 output/gdrn/hbPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_hb/23_dog/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/hbPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_hb/29_tea_box.py 0 output/gdrn/hbPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_hb/29_tea_box/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/hbPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_hb/32_car.py 0 output/gdrn/hbPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_hb/32_car/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/hbPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_hb/33_yellow_rabbit.py 0 output/gdrn/hbPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_hb/33_yellow_rabbit/model_final_wo_optim.pth
-```
-
-### ICBIN
-```
-sudo docker run --rm --shm-size=10gb --runtime=nvidia --gpus all -dit --name gdrnpp-test --mount type=bind,source=/media/eric/Hoboken/Projects/Consensus_Driven_Uncertainty/Datasets/BOP,target=/home/gdrnpp_bop2022/datasets/BOP_DATASETS --mount type=bind,source=/media/eric/Hoboken/Projects/Consensus_Driven_Uncertainty/Models/GDRNPP,target=/home/gdrnpp_bop2022/output/gdrn gdrnpp
-sudo docker exec -it gdrnpp-test bash
-
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/icbin_pbr/convnext_a6_AugCosyAAEGray_BG05_mlL1_DMask_amodalClipBox_classAware_icbin.py 0 output/gdrn/icbin_pbr/convnext_a6_AugCosyAAEGray_BG05_mlL1_DMask_amodalClipBox_classAware_icbin/model_final_wo_optim.pth
-
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/icbinPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_icbin/01_coffee_cup.py 0 output/gdrn/icbinPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_icbin/coffee_cup/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/icbinPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_icbin/02_juice_carton.py 0 output/gdrn/icbinPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_icbin/juice_carton/model_final_wo_optim.pth
-```
-
-### ITODD
-```
-sudo docker run --rm --shm-size=10gb --runtime=nvidia --gpus all -dit --name gdrnpp-test --mount type=bind,source=/media/eric/Hoboken/Projects/Consensus_Driven_Uncertainty/Datasets/BOP,target=/home/gdrnpp_bop2022/datasets/BOP_DATASETS --mount type=bind,source=/media/eric/Hoboken/Projects/Consensus_Driven_Uncertainty/Models/GDRNPP,target=/home/gdrnpp_bop2022/output/gdrn gdrnpp
-sudo docker exec -it gdrnpp-test bash
-
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/itodd_pbr/convnext_a6_AugCosyAAEGray_BG05_mlL1_DMask_amodalClipBox_classAware_itodd.py 0 output/gdrn/itodd_pbr/convnext_a6_AugCosyAAEGray_BG05_mlL1_DMask_amodalClipBox_classAware_itodd/model_final_wo_optim.pth
-
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/itoddPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_itodd/1.py 0 output/gdrn/itoddPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_itodd/1/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/itoddPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_itodd/2.py 0 output/gdrn/itoddPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_itodd/2/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/itoddPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_itodd/3.py 0 output/gdrn/itoddPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_itodd/3/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/itoddPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_itodd/4.py 0 output/gdrn/itoddPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_itodd/4/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/itoddPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_itodd/5.py 0 output/gdrn/itoddPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_itodd/5/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/itoddPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_itodd/6.py 0 output/gdrn/itoddPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_itodd/6/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/itoddPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_itodd/7.py 0 output/gdrn/itoddPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_itodd/7/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/itoddPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_itodd/8.py 0 output/gdrn/itoddPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_itodd/8/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/itoddPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_itodd/9.py 0 output/gdrn/itoddPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_itodd/9/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/itoddPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_itodd/10.py 0 output/gdrn/itoddPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_itodd/10/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/itoddPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_itodd/11.py 0 output/gdrn/itoddPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_itodd/11/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/itoddPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_itodd/12.py 0 output/gdrn/itoddPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_itodd/12/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/itoddPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_itodd/13.py 0 output/gdrn/itoddPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_itodd/13/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/itoddPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_itodd/14.py 0 output/gdrn/itoddPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_itodd/14/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/itoddPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_itodd/15.py 0 output/gdrn/itoddPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_itodd/15/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/itoddPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_itodd/16.py 0 output/gdrn/itoddPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_itodd/16/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/itoddPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_itodd/17.py 0 output/gdrn/itoddPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_itodd/17/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/itoddPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_itodd/18.py 0 output/gdrn/itoddPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_itodd/18/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/itoddPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_itodd/19.py 0 output/gdrn/itoddPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_itodd/19/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/itoddPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_itodd/20.py 0 output/gdrn/itoddPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_itodd/20/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/itoddPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_itodd/21.py 0 output/gdrn/itoddPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_itodd/21/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/itoddPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_itodd/22.py 0 output/gdrn/itoddPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_itodd/22/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/itoddPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_itodd/23.py 0 output/gdrn/itoddPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_itodd/23/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/itoddPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_itodd/24.py 0 output/gdrn/itoddPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_itodd/24/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/itoddPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_itodd/25.py 0 output/gdrn/itoddPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_itodd/25/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/itoddPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_itodd/26.py 0 output/gdrn/itoddPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_itodd/26/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/itoddPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_itodd/27.py 0 output/gdrn/itoddPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_itodd/27/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/itoddPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_itodd/28.py 0 output/gdrn/itoddPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_itodd/28/model_final_wo_optim.pth
-```
-
 ### LMO
 ```
 sudo docker run --rm --shm-size=10gb --runtime=nvidia --gpus all -dit --name gdrnpp-test --mount type=bind,source=/media/eric/Hoboken/Projects/Consensus_Driven_Uncertainty/Datasets/BOP,target=/home/gdrnpp_bop2022/datasets/BOP_DATASETS --mount type=bind,source=/media/eric/Hoboken/Projects/Consensus_Driven_Uncertainty/Models/GDRNPP,target=/home/gdrnpp_bop2022/output/gdrn gdrnpp
@@ -418,69 +241,6 @@ sudo docker exec -it gdrnpp-test bash
 ./core/gdrn_modeling/test_gdrn.sh configs/gdrn/lmoPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_lmo/eggbox.py 0 output/gdrn/lmoPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_lmo/eggbox/model_final_wo_optim.pth
 ./core/gdrn_modeling/test_gdrn.sh configs/gdrn/lmoPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_lmo/glue.py 0 output/gdrn/lmoPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_lmo/glue/model_final_wo_optim.pth
 ./core/gdrn_modeling/test_gdrn.sh configs/gdrn/lmoPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_lmo/holepuncher.py 0 output/gdrn/lmoPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_lmo/holepuncher/model_final_wo_optim.pth
-```
-
-### TLESS
-This dataset is too large to fit within the 10GB I can afford to allocate for the container.
-
-The ideal solution would be to *hide* part of TLESS and run tests on the remaining part. Then restore and conceal other parts, testing whatever is visible in the `tless` directory. We would only need to protect each test's results from being over-written by the next.
-
-But this repo is too over-engineered to allow that. We have to change the config files in the container, too. Very annoying.
-
-```
-sudo docker run --rm --shm-size=10gb --runtime=nvidia --gpus all -dit --name gdrnpp-test --mount type=bind,source=/media/eric/Hoboken/Projects/Consensus_Driven_Uncertainty/Datasets/BOP,target=/home/gdrnpp_bop2022/datasets/BOP_DATASETS --mount type=bind,source=/media/eric/Hoboken/Projects/Consensus_Driven_Uncertainty/Models/GDRNPP,target=/home/gdrnpp_bop2022/output/gdrn gdrnpp
-sudo docker exec -it gdrnpp-test bash
-
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/tless/convnext_a6_AugCosyAAEGray_BG05_mlL1_DMask_amodalClipBox_classAware_tless.py 0 output/gdrn/tless/convnext_a6_AugCosyAAEGray_BG05_mlL1_DMask_amodalClipBox_classAware_tless/model_final_wo_optim.pth
-
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/tlessPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tless/1.py 0 output/gdrn/tlessPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tless/1/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/tlessPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tless/2.py 0 output/gdrn/tlessPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tless/2/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/tlessPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tless/3.py 0 output/gdrn/tlessPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tless/3/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/tlessPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tless/4.py 0 output/gdrn/tlessPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tless/4/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/tlessPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tless/5.py 0 output/gdrn/tlessPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tless/5/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/tlessPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tless/6.py 0 output/gdrn/tlessPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tless/6/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/tlessPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tless/7.py 0 output/gdrn/tlessPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tless/7/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/tlessPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tless/8.py 0 output/gdrn/tlessPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tless/8/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/tlessPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tless/9.py 0 output/gdrn/tlessPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tless/9/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/tlessPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tless/10.py 0 output/gdrn/tlessPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tless/10/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/tlessPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tless/11.py 0 output/gdrn/tlessPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tless/11/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/tlessPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tless/12.py 0 output/gdrn/tlessPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tless/12/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/tlessPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tless/13.py 0 output/gdrn/tlessPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tless/13/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/tlessPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tless/14.py 0 output/gdrn/tlessPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tless/14/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/tlessPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tless/15.py 0 output/gdrn/tlessPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tless/15/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/tlessPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tless/16.py 0 output/gdrn/tlessPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tless/16/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/tlessPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tless/17.py 0 output/gdrn/tlessPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tless/17/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/tlessPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tless/18.py 0 output/gdrn/tlessPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tless/18/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/tlessPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tless/19.py 0 output/gdrn/tlessPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tless/19/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/tlessPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tless/20.py 0 output/gdrn/tlessPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tless/20/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/tlessPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tless/21.py 0 output/gdrn/tlessPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tless/21/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/tlessPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tless/22.py 0 output/gdrn/tlessPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tless/22/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/tlessPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tless/23.py 0 output/gdrn/tlessPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tless/23/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/tlessPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tless/24.py 0 output/gdrn/tlessPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tless/24/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/tlessPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tless/25.py 0 output/gdrn/tlessPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tless/25/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/tlessPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tless/26.py 0 output/gdrn/tlessPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tless/26/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/tlessPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tless/27.py 0 output/gdrn/tlessPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tless/27/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/tlessPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tless/28.py 0 output/gdrn/tlessPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tless/28/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/tlessPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tless/29.py 0 output/gdrn/tlessPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tless/29/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/tlessPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tless/30.py 0 output/gdrn/tlessPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tless/30/model_final_wo_optim.pth
-
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/tlessSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tless/1.py 0 output/gdrn/tlessSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tless/1/model_final_wo_optim.pth
-```
-
-### TUDL
-```
-sudo docker run --rm --shm-size=10gb --runtime=nvidia --gpus all -dit --name gdrnpp-test --mount type=bind,source=/media/eric/Hoboken/Projects/Consensus_Driven_Uncertainty/Datasets/BOP,target=/home/gdrnpp_bop2022/datasets/BOP_DATASETS --mount type=bind,source=/media/eric/Hoboken/Projects/Consensus_Driven_Uncertainty/Models/GDRNPP,target=/home/gdrnpp_bop2022/output/gdrn gdrnpp
-sudo docker exec -it gdrnpp-test bash
-
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/tudl/convnext_a6_AugCosyAAEGray_BG05_mlL1_DMask_amodalClipBox_classAware_tudl.py 0 output/gdrn/tudl/convnext_a6_AugCosyAAEGray_BG05_mlL1_DMask_amodalClipBox_classAware_tudl/model_final_wo_optim.pth
-
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/tudlPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tudl/01_dragon.py 0 output/gdrn/tudlPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tudl/dragon/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/tudlPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tudl/02_frog.py 0 output/gdrn/tudlPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tudl/frog/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/tudlPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tudl/03_can.py 0 output/gdrn/tudlPbrSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tudl/can/model_final_wo_optim.pth
-
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/tudlSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tudl/01_dragon.py 0 output/gdrn/tudlSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tudl/dragon/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/tudlSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tudl/02_frog.py 0 output/gdrn/tudlSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tudl/frog/model_final_wo_optim.pth
-./core/gdrn_modeling/test_gdrn.sh configs/gdrn/tudlSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tudl/03_can.py 0 output/gdrn/tudlSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_tudl/can/model_final_wo_optim.pth
 ```
 
 ### YCBV
@@ -535,5 +295,3 @@ sudo docker exec -it gdrnpp-test bash
 ./core/gdrn_modeling/test_gdrn.sh configs/gdrn/ycbvSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_ycbv/052_extra_large_clamp.py 0 output/gdrn/ycbvSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_ycbv/052_extra_large_clamp/model_final_wo_optim.pth
 ./core/gdrn_modeling/test_gdrn.sh configs/gdrn/ycbvSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_ycbv/061_foam_brick.py 0 output/gdrn/ycbvSO/convnext_AugCosyAAEGray_DMask_amodalClipBox_ycbv/061_foam_brick/model_final_wo_optim.pth
 ```
-
-## Render GDRNPP results
