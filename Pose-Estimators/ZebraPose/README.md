@@ -100,13 +100,7 @@ wget https://download.pytorch.org/models/efficientnet_b4_rwightman-7eb33cd5.pth
 ```
 The datasets found on the DFKI cloud contain information ZebraPose will need just to run inference.
 
-For **LM**, copy `models_GT_color` from 'lmo' into the existing `lm` directory. Note that this means we will only be able to detect in `lm` the subset of objects making up `lmo`.
-
 For **LMO**, copy `models_GT_color` and `test_GT` into the existing `lmo` directory.
-
-For **TLESS**, copy `models`, `models_GT_color`, and `test_primesense_bop_GT` into the existing `tless` directory. Rename `test_primesense` to `test_primesense_bop`.
-
-For **TUDL**, copy `models_GT_color` and `test_GT` into the existing `tudl` directory.
 
 For **YCBV**, copy `models_GT_color` and `test_GT` into the existing `ycbv` directory.
 
@@ -126,39 +120,6 @@ Replace these files with their equivalents from this repository:
 I've initialled all changes.
 
 Notice that the out-of-the-box ZebraPose repository includes a directory `zebrapose/detection_results/`. Inside are several subdirectories named for BOP datasets. These are pre-computed object-detections, so that we do not need to train, load, or run object detection before running ZebraPose.
-
-### LM (ResNet version)
-Create a copy of `ZebraPose/zebrapose/config/config_BOP/lmo/exp_lmo_BOP.txt` named `ZebraPose/zebrapose/config/config_BOP/lm/exp_lm_BOP.txt`.
-
-Make sure that line 3 of `ZebraPose/zebrapose/config/config_BOP/lm/exp_lm_BOP.txt` reads `bop_challange = True`
-
-Change line 4 of `ZebraPose/zebrapose/config/config_BOP/lm/exp_lm_BOP.txt` to `bop_path = /media/eric/Hoboken/Projects/Uncertainty for 6DoF Pose Est/Datasets/BOP`
-
-Change line 5 of `ZebraPose/zebrapose/config/config_BOP/lm/exp_lm_BOP.txt` to `dataset_name = lm`
-
-Change line 35 of `ZebraPose/zebrapose/config/config_BOP/lm/exp_lm_BOP.txt` to `check_point_path=/home/eric/Documents/ZebraPose/checkpoints/resnet/` (and make sure such a directory exists.)
-
-Change line 36 of `ZebraPose/zebrapose/config/config_BOP/lm/exp_lm_BOP.txt` to `tensorboard_path=/home/eric/Documents/ZebraPose/tensorboard_logs/runs/` (and make sure such a directory exists.)
-
-Change line 51 of `ZebraPose/zebrapose/config/config_BOP/lm/exp_lm_BOP.txt` to `Detection_reaults = detection_results/lm/bbox_yolov3_all.json`
-
-Create a directory named `ZebraPose/checkpoints/resnet/lm` and copy the pre-trained weights from `ZebraPose/checkpoints/resnet/lmo` into it. Notice how these paths are specified in the script calls below.
-
-Create the directory `ZebraPose/evaluation_output`. ZebraPose will write `*.csv` and `*.bbox` files here.
-
-Now run ZebraPose for every LMO object in LM. Notice that we turn ICP refinement off.
-
-```
-cd ZebraPose/zebrapose
-python3 test.py --cfg config/config_BOP/lm/exp_lm_BOP.txt --obj_name ape --ckpt_file ../checkpoints/resnet/lm/ape --ignore_bit 0 --use_icp False --eval_output_path ../evaluation_output
-python3 test.py --cfg config/config_BOP/lm/exp_lm_BOP.txt --obj_name can --ckpt_file ../checkpoints/resnet/lm/can --ignore_bit 0 --use_icp False --eval_output_path ../evaluation_output
-python3 test.py --cfg config/config_BOP/lm/exp_lm_BOP.txt --obj_name cat --ckpt_file ../checkpoints/resnet/lm/cat --ignore_bit 0 --use_icp False --eval_output_path ../evaluation_output
-python3 test.py --cfg config/config_BOP/lm/exp_lm_BOP.txt --obj_name driller --ckpt_file ../checkpoints/resnet/lm/driller --ignore_bit 0 --use_icp False --eval_output_path ../evaluation_output
-python3 test.py --cfg config/config_BOP/lm/exp_lm_BOP.txt --obj_name duck --ckpt_file ../checkpoints/resnet/lm/duck --ignore_bit 0 --use_icp False --eval_output_path ../evaluation_output
-python3 test.py --cfg config/config_BOP/lm/exp_lm_BOP.txt --obj_name eggbox --ckpt_file ../checkpoints/resnet/lm/eggbox --ignore_bit 0 --use_icp False --eval_output_path ../evaluation_output
-python3 test.py --cfg config/config_BOP/lm/exp_lm_BOP.txt --obj_name glue --ckpt_file ../checkpoints/resnet/lm/glue --ignore_bit 0 --use_icp False --eval_output_path ../evaluation_output
-python3 test.py --cfg config/config_BOP/lm/exp_lm_BOP.txt --obj_name holepuncher --ckpt_file ../checkpoints/resnet/lm/holepuncher --ignore_bit 0 --use_icp False --eval_output_path ../evaluation_output
-```
 
 ### LMO (ResNet version)
 Make sure that line 3 of `ZebraPose/zebrapose/config/config_BOP/lmo/exp_lmo_BOP.txt` reads `bop_challange = True`
@@ -185,79 +146,6 @@ python3 test.py --cfg config/config_BOP/lmo/exp_lmo_BOP.txt --obj_name duck --ck
 python3 test.py --cfg config/config_BOP/lmo/exp_lmo_BOP.txt --obj_name eggbox --ckpt_file ../checkpoints/resnet/lmo/eggbox --ignore_bit 0 --use_icp False --eval_output_path ../evaluation_output
 python3 test.py --cfg config/config_BOP/lmo/exp_lmo_BOP.txt --obj_name glue --ckpt_file ../checkpoints/resnet/lmo/glue --ignore_bit 0 --use_icp False --eval_output_path ../evaluation_output
 python3 test.py --cfg config/config_BOP/lmo/exp_lmo_BOP.txt --obj_name holepuncher --ckpt_file ../checkpoints/resnet/lmo/holepuncher --ignore_bit 0 --use_icp False --eval_output_path ../evaluation_output
-```
-
-### TLESS (ResNet version)
-Make sure that line 2 of `ZebraPose/zebrapose/config/config_BOP/tless/exp_tless_BOP.txt` reads `bop_challange = True`
-
-Change line 3 of `ZebraPose/zebrapose/config/config_BOP/tless/exp_tless_BOP.txt` to `bop_path = /media/eric/Hoboken/Projects/Uncertainty for 6DoF Pose Est/Datasets/BOP`
-
-Change line 34 of `ZebraPose/zebrapose/config/config_BOP/tless/exp_tless_BOP.txt` to `check_point_path=/home/eric/Documents/ZebraPose/checkpoints/resnet/` (and make sure such a directory exists.)
-
-Change line 35 of `ZebraPose/zebrapose/config/config_BOP/tless/exp_tless_BOP.txt` to `tensorboard_path=/home/eric/Documents/ZebraPose/tensorboard_logs/runs/` (and make sure such a directory exists.)
-
-Following the steps above, you should have a directory named `ZebraPose/checkpoints/resnet/tless` containing pre-trained weights for objects in this dataset from the DFKI cloud. Notice how these paths are specified in the script calls below.
-
-If you have not already done so, create the directory `ZebraPose/evaluation_output`. ZebraPose will write `*.csv` and `*.bbox` files here.
-
-Now run ZebraPose for every object in TLESS. Notice that we turn ICP refinement off.
-
-Notice also that we run the `test.py` script for TLESS rather than `test_vivo.py`. "VIVO" stands for "Varying numbers of Instances, Varying numbers of Objects," meaning the test considers potentially multiple instances of potentially multiple detectable things. The ZebraPose authors recommend `test_vivo.py` for TLESS because this script saves several predictions per object detection, making concessions to the high degree of symmetry for the TLESS dataset. `test.py` simply records the highest-scoring prediction, which is really all we're interested in.
-
-```
-cd ZebraPose/zebrapose
-python3 test.py --cfg config/config_BOP/tless/exp_tless_BOP.txt --obj_name obj01 --ckpt_file ../checkpoints/resnet/tless/obj01 --ignore_bit 0 --use_icp False --eval_output_path ../evaluation_output
-python3 test.py --cfg config/config_BOP/tless/exp_tless_BOP.txt --obj_name obj02 --ckpt_file ../checkpoints/resnet/tless/obj02 --ignore_bit 0 --use_icp False --eval_output_path ../evaluation_output
-python3 test.py --cfg config/config_BOP/tless/exp_tless_BOP.txt --obj_name obj03 --ckpt_file ../checkpoints/resnet/tless/obj03 --ignore_bit 0 --use_icp False --eval_output_path ../evaluation_output
-python3 test.py --cfg config/config_BOP/tless/exp_tless_BOP.txt --obj_name obj04 --ckpt_file ../checkpoints/resnet/tless/obj04 --ignore_bit 0 --use_icp False --eval_output_path ../evaluation_output
-python3 test.py --cfg config/config_BOP/tless/exp_tless_BOP.txt --obj_name obj05 --ckpt_file ../checkpoints/resnet/tless/obj05 --ignore_bit 0 --use_icp False --eval_output_path ../evaluation_output
-python3 test.py --cfg config/config_BOP/tless/exp_tless_BOP.txt --obj_name obj06 --ckpt_file ../checkpoints/resnet/tless/obj06 --ignore_bit 0 --use_icp False --eval_output_path ../evaluation_output
-python3 test.py --cfg config/config_BOP/tless/exp_tless_BOP.txt --obj_name obj07 --ckpt_file ../checkpoints/resnet/tless/obj07 --ignore_bit 0 --use_icp False --eval_output_path ../evaluation_output
-python3 test.py --cfg config/config_BOP/tless/exp_tless_BOP.txt --obj_name obj08 --ckpt_file ../checkpoints/resnet/tless/obj08 --ignore_bit 0 --use_icp False --eval_output_path ../evaluation_output
-python3 test.py --cfg config/config_BOP/tless/exp_tless_BOP.txt --obj_name obj09 --ckpt_file ../checkpoints/resnet/tless/obj09 --ignore_bit 0 --use_icp False --eval_output_path ../evaluation_output
-python3 test.py --cfg config/config_BOP/tless/exp_tless_BOP.txt --obj_name obj10 --ckpt_file ../checkpoints/resnet/tless/obj10 --ignore_bit 0 --use_icp False --eval_output_path ../evaluation_output
-python3 test.py --cfg config/config_BOP/tless/exp_tless_BOP.txt --obj_name obj11 --ckpt_file ../checkpoints/resnet/tless/obj11 --ignore_bit 0 --use_icp False --eval_output_path ../evaluation_output
-python3 test.py --cfg config/config_BOP/tless/exp_tless_BOP.txt --obj_name obj12 --ckpt_file ../checkpoints/resnet/tless/obj12 --ignore_bit 0 --use_icp False --eval_output_path ../evaluation_output
-python3 test.py --cfg config/config_BOP/tless/exp_tless_BOP.txt --obj_name obj13 --ckpt_file ../checkpoints/resnet/tless/obj13 --ignore_bit 0 --use_icp False --eval_output_path ../evaluation_output
-python3 test.py --cfg config/config_BOP/tless/exp_tless_BOP.txt --obj_name obj14 --ckpt_file ../checkpoints/resnet/tless/obj14 --ignore_bit 0 --use_icp False --eval_output_path ../evaluation_output
-python3 test.py --cfg config/config_BOP/tless/exp_tless_BOP.txt --obj_name obj15 --ckpt_file ../checkpoints/resnet/tless/obj15 --ignore_bit 0 --use_icp False --eval_output_path ../evaluation_output
-python3 test.py --cfg config/config_BOP/tless/exp_tless_BOP.txt --obj_name obj16 --ckpt_file ../checkpoints/resnet/tless/obj16 --ignore_bit 0 --use_icp False --eval_output_path ../evaluation_output
-python3 test.py --cfg config/config_BOP/tless/exp_tless_BOP.txt --obj_name obj17 --ckpt_file ../checkpoints/resnet/tless/obj17 --ignore_bit 0 --use_icp False --eval_output_path ../evaluation_output
-python3 test.py --cfg config/config_BOP/tless/exp_tless_BOP.txt --obj_name obj18 --ckpt_file ../checkpoints/resnet/tless/obj18 --ignore_bit 0 --use_icp False --eval_output_path ../evaluation_output
-python3 test.py --cfg config/config_BOP/tless/exp_tless_BOP.txt --obj_name obj19 --ckpt_file ../checkpoints/resnet/tless/obj19 --ignore_bit 0 --use_icp False --eval_output_path ../evaluation_output
-python3 test.py --cfg config/config_BOP/tless/exp_tless_BOP.txt --obj_name obj20 --ckpt_file ../checkpoints/resnet/tless/obj20 --ignore_bit 0 --use_icp False --eval_output_path ../evaluation_output
-python3 test.py --cfg config/config_BOP/tless/exp_tless_BOP.txt --obj_name obj21 --ckpt_file ../checkpoints/resnet/tless/obj21 --ignore_bit 0 --use_icp False --eval_output_path ../evaluation_output
-python3 test.py --cfg config/config_BOP/tless/exp_tless_BOP.txt --obj_name obj22 --ckpt_file ../checkpoints/resnet/tless/obj22 --ignore_bit 0 --use_icp False --eval_output_path ../evaluation_output
-python3 test.py --cfg config/config_BOP/tless/exp_tless_BOP.txt --obj_name obj23 --ckpt_file ../checkpoints/resnet/tless/obj23 --ignore_bit 0 --use_icp False --eval_output_path ../evaluation_output
-python3 test.py --cfg config/config_BOP/tless/exp_tless_BOP.txt --obj_name obj24 --ckpt_file ../checkpoints/resnet/tless/obj24 --ignore_bit 0 --use_icp False --eval_output_path ../evaluation_output
-python3 test.py --cfg config/config_BOP/tless/exp_tless_BOP.txt --obj_name obj25 --ckpt_file ../checkpoints/resnet/tless/obj25 --ignore_bit 0 --use_icp False --eval_output_path ../evaluation_output
-python3 test.py --cfg config/config_BOP/tless/exp_tless_BOP.txt --obj_name obj26 --ckpt_file ../checkpoints/resnet/tless/obj26 --ignore_bit 0 --use_icp False --eval_output_path ../evaluation_output
-python3 test.py --cfg config/config_BOP/tless/exp_tless_BOP.txt --obj_name obj27 --ckpt_file ../checkpoints/resnet/tless/obj27 --ignore_bit 0 --use_icp False --eval_output_path ../evaluation_output
-python3 test.py --cfg config/config_BOP/tless/exp_tless_BOP.txt --obj_name obj28 --ckpt_file ../checkpoints/resnet/tless/obj28 --ignore_bit 0 --use_icp False --eval_output_path ../evaluation_output
-python3 test.py --cfg config/config_BOP/tless/exp_tless_BOP.txt --obj_name obj29 --ckpt_file ../checkpoints/resnet/tless/obj29 --ignore_bit 0 --use_icp False --eval_output_path ../evaluation_output
-python3 test.py --cfg config/config_BOP/tless/exp_tless_BOP.txt --obj_name obj30 --ckpt_file ../checkpoints/resnet/tless/obj30 --ignore_bit 0 --use_icp False --eval_output_path ../evaluation_output
-```
-
-### TUDL (ResNet version)
-Make sure that line 2 of `ZebraPose/zebrapose/config/config_BOP/tudl/exp_tudl_BOP.txt` reads `bop_challange = True`
-
-Change line 3 of `ZebraPose/zebrapose/config/config_BOP/tudl/exp_tudl_BOP.txt` to `bop_path = /media/eric/Hoboken/Projects/Uncertainty for 6DoF Pose Est/Datasets/BOP`
-
-Change line 34 of `ZebraPose/zebrapose/config/config_BOP/tudl/exp_tudl_BOP.txt` to `check_point_path=/home/eric/Documents/ZebraPose/checkpoints/resnet/` (and make sure such a directory exists.)
-
-Change line 35 of `ZebraPose/zebrapose/config/config_BOP/ycbv/exp_ycbv_BOP.txt` to `tensorboard_path=/home/eric/Documents/ZebraPose/tensorboard_logs/runs/` (and make sure such a directory exists.)
-
-Following the steps above, you should have a directory named `ZebraPose/checkpoints/resnet/tudl` containing pre-trained weights for objects in this dataset from the DFKI cloud. Notice how these paths are specified in the script calls below.
-
-Create the directory `ZebraPose/evaluation_output`. ZebraPose will write `*.csv` and `*.bbox` files here.
-
-Now run ZebraPose for every object in TUDL. Notice that we turn ICP refinement off.
-
-```
-cd ZebraPose/zebrapose
-python3 test.py --cfg config/config_BOP/tudl/exp_tudl_BOP.txt --obj_name obj01 --ckpt_file ../checkpoints/resnet/tudl/obj01 --ignore_bit 0 --use_icp False --eval_output_path ../evaluation_output
-python3 test.py --cfg config/config_BOP/tudl/exp_tudl_BOP.txt --obj_name obj02 --ckpt_file ../checkpoints/resnet/tudl/obj02 --ignore_bit 0 --use_icp False --eval_output_path ../evaluation_output
-python3 test.py --cfg config/config_BOP/tudl/exp_tudl_BOP.txt --obj_name obj03 --ckpt_file ../checkpoints/resnet/tudl/obj03 --ignore_bit 0 --use_icp False --eval_output_path ../evaluation_output
 ```
 
 ### YCBV (ResNet version)
@@ -332,103 +220,6 @@ Manually specify `method`, `dataset`, `split`, and `split_type` in `ZebraPose/bo
   result_info = result_name.split('_')
   method = 'ZebraPose'                                              #  EJ
   dataset = 'lmo'                                                   #  EJ
-  split = 'test'                                                    #  EJ
-  split_type = None                                                 #  EJ
-  '''                                                               #  EJ
-  method = result_info[0]
-  dataset_info = result_info[1].split('-')
-  dataset = dataset_info[0]
-  split = dataset_info[1]
-  split_type = dataset_info[2] if len(dataset_info) > 2 else None
-  '''                                                               #  EJ
-```
-
-The generic call to the rendering script appears as follows:
-
-```
-cd ZebraPose/bop_toolkit
-python3 scripts/vis_est_poses.py --renderer_type=vispy
-```
-
-### Render results for TLESS
-Redefine the variable `result_filenames` in `ZebraPose/bop_toolkit/scripts/vis_est_poses.py` to target results from the TLESS dataset:
-```
-  'result_filenames': [
-    '/home/eric/Documents/ZebraPose/evaluation_output/pose_result_bop/tless/tless_obj01.csv',
-    '/home/eric/Documents/ZebraPose/evaluation_output/pose_result_bop/tless/tless_obj02.csv',
-    '/home/eric/Documents/ZebraPose/evaluation_output/pose_result_bop/tless/tless_obj03.csv',
-    '/home/eric/Documents/ZebraPose/evaluation_output/pose_result_bop/tless/tless_obj04.csv',
-    '/home/eric/Documents/ZebraPose/evaluation_output/pose_result_bop/tless/tless_obj05.csv',
-    '/home/eric/Documents/ZebraPose/evaluation_output/pose_result_bop/tless/tless_obj06.csv',
-    '/home/eric/Documents/ZebraPose/evaluation_output/pose_result_bop/tless/tless_obj07.csv',
-    '/home/eric/Documents/ZebraPose/evaluation_output/pose_result_bop/tless/tless_obj08.csv',
-    '/home/eric/Documents/ZebraPose/evaluation_output/pose_result_bop/tless/tless_obj09.csv',
-    '/home/eric/Documents/ZebraPose/evaluation_output/pose_result_bop/tless/tless_obj10.csv',
-    '/home/eric/Documents/ZebraPose/evaluation_output/pose_result_bop/tless/tless_obj11.csv',
-    '/home/eric/Documents/ZebraPose/evaluation_output/pose_result_bop/tless/tless_obj12.csv',
-    '/home/eric/Documents/ZebraPose/evaluation_output/pose_result_bop/tless/tless_obj13.csv',
-    '/home/eric/Documents/ZebraPose/evaluation_output/pose_result_bop/tless/tless_obj14.csv',
-    '/home/eric/Documents/ZebraPose/evaluation_output/pose_result_bop/tless/tless_obj15.csv',
-    '/home/eric/Documents/ZebraPose/evaluation_output/pose_result_bop/tless/tless_obj16.csv',
-    '/home/eric/Documents/ZebraPose/evaluation_output/pose_result_bop/tless/tless_obj17.csv',
-    '/home/eric/Documents/ZebraPose/evaluation_output/pose_result_bop/tless/tless_obj18.csv',
-    '/home/eric/Documents/ZebraPose/evaluation_output/pose_result_bop/tless/tless_obj19.csv',
-    '/home/eric/Documents/ZebraPose/evaluation_output/pose_result_bop/tless/tless_obj20.csv',
-    '/home/eric/Documents/ZebraPose/evaluation_output/pose_result_bop/tless/tless_obj21.csv',
-    '/home/eric/Documents/ZebraPose/evaluation_output/pose_result_bop/tless/tless_obj22.csv',
-    '/home/eric/Documents/ZebraPose/evaluation_output/pose_result_bop/tless/tless_obj23.csv',
-    '/home/eric/Documents/ZebraPose/evaluation_output/pose_result_bop/tless/tless_obj24.csv',
-    '/home/eric/Documents/ZebraPose/evaluation_output/pose_result_bop/tless/tless_obj25.csv',
-    '/home/eric/Documents/ZebraPose/evaluation_output/pose_result_bop/tless/tless_obj26.csv',
-    '/home/eric/Documents/ZebraPose/evaluation_output/pose_result_bop/tless/tless_obj27.csv',
-    '/home/eric/Documents/ZebraPose/evaluation_output/pose_result_bop/tless/tless_obj28.csv',
-    '/home/eric/Documents/ZebraPose/evaluation_output/pose_result_bop/tless/tless_obj29.csv',
-    '/home/eric/Documents/ZebraPose/evaluation_output/pose_result_bop/tless/tless_obj30.csv'
-  ],
-```
-
-Manually specify `method`, `dataset`, `split`, and `split_type` in `ZebraPose/bop_toolkit/scripts/vis_est_poses.py`:
-```
-  # Parse info about the method and the dataset from the filename.
-  result_name = os.path.splitext(os.path.basename(result_fname))[0]
-  result_info = result_name.split('_')
-  method = 'ZebraPose'                                              #  EJ
-  dataset = 'tless'                                                 #  EJ
-  split = 'test'                                                    #  EJ
-  split_type = 'primesense_bop'                                     #  EJ
-  '''                                                               #  EJ
-  method = result_info[0]
-  dataset_info = result_info[1].split('-')
-  dataset = dataset_info[0]
-  split = dataset_info[1]
-  split_type = dataset_info[2] if len(dataset_info) > 2 else None
-  '''                                                               #  EJ
-```
-
-The generic call to the rendering script appears as follows:
-
-```
-cd ZebraPose/bop_toolkit
-python3 scripts/vis_est_poses.py --renderer_type=vispy
-```
-
-### Render results for TUDL
-Redefine the variable `result_filenames` in `ZebraPose/bop_toolkit/scripts/vis_est_poses.py` to target results from the TUDL dataset:
-```
-  'result_filenames': [
-    '/home/eric/Documents/ZebraPose/evaluation_output/pose_result_bop/tudl/tudl_obj01.csv',
-    '/home/eric/Documents/ZebraPose/evaluation_output/pose_result_bop/tudl/tudl_obj02.csv',
-    '/home/eric/Documents/ZebraPose/evaluation_output/pose_result_bop/tudl/tudl_obj03.csv'
-  ],
-```
-
-Manually specify `method`, `dataset`, `split`, and `split_type` in `ZebraPose/bop_toolkit/scripts/vis_est_poses.py`:
-```
-  # Parse info about the method and the dataset from the filename.
-  result_name = os.path.splitext(os.path.basename(result_fname))[0]
-  result_info = result_name.split('_')
-  method = 'ZebraPose'                                              #  EJ
-  dataset = 'tudl'                                                  #  EJ
   split = 'test'                                                    #  EJ
   split_type = None                                                 #  EJ
   '''                                                               #  EJ
