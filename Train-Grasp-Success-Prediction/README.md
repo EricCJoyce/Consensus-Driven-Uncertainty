@@ -1,1 +1,1 @@
-![Network structure](MLP.png | width=100)
+![Network structure](MLP_400x400.png)
