@@ -141,9 +141,9 @@ Download pre-computed test-set bounding boxes from the authors' [OneDrive](https
               \--yolox_x_640_ycbv_real_pbr_ycbv_bop_test.json
 ```
 
-These pre-computed bounding boxes need to be integrated with your system's existing copy of the BOP dataset. In may case, the BOP dataset is at `/media/eric/Hoboken/Projects/Uncertainty for 6DoF Pose Est/Datasets/BOP`. It must therefore become:
+These pre-computed bounding boxes need to be integrated with your system's existing copy of the BOP dataset. In may case, the BOP dataset is at `/media/eric/Hoboken/Projects/Consensus_Driven_Uncertainty/Datasets/BOP`. It must therefore become:
 ```
-/media/eric/Hoboken/Projects/Uncertainty for 6DoF Pose Est/Datasets/BOP
+/media/eric/Hoboken/Projects/Consensus_Driven_Uncertainty/Datasets/BOP
   |
   +--hb
   |   +--models
@@ -311,7 +311,7 @@ gdrnpp       latest    4690fe2e8647   45 seconds ago   37.9GB
 
 ## Test
 
-Upon running the container, we will map the dataset directory `/media/eric/Hoboken/Projects/Uncertainty for 6DoF Pose Est/Datasets/BOP` to the path `/home/gdrnpp_bop2022/datasets/BOP_DATASETS` inside the container so that GDRNPP can reach the BOP dataset. Similarly, we will map `/media/eric/Hoboken/Projects/Uncertainty for 6DoF Pose Est/Models/GDRNPP` to the path `/home/gdrnpp_bop2022/output/gdrn` inside the container so that GDRNPP has access to the various downloaded model weights. The test scripts in the GDRNPP repository will also write pose prediction results to the directory containing model checkpoints.
+Upon running the container, we will map the dataset directory `/media/eric/Hoboken/Projects/Consensus_Driven_Uncertainty/Datasets/BOP` to the path `/home/gdrnpp_bop2022/datasets/BOP_DATASETS` inside the container so that GDRNPP can reach the BOP dataset. Similarly, we will map `/media/eric/Hoboken/Projects/Consensus_Driven_Uncertainty/Models/GDRNPP` to the path `/home/gdrnpp_bop2022/output/gdrn` inside the container so that GDRNPP has access to the various downloaded model weights. The test scripts in the GDRNPP repository will also write pose prediction results to the directory containing model checkpoints.
 
 An annotated testing template:
 ```
@@ -319,8 +319,8 @@ sudo docker run --rm \                          #  Delete the container once it'
                 --shm-size=10gb \               #  Give the container ample shared memory.
                 --runtime=nvidia --gpus all \   #  Make host GPU visible to container.
                 -dit --name gdrnpp-test \       #  Provide connections (mounts) to data and models.
-                --mount type=bind,source=/media/eric/Hoboken/Projects/Uncertainty\ for\ 6DoF\ Pose\ Est/Datasets/BOP,target=/home/gdrnpp_bop2022/datasets/BOP_DATASETS \
-                --mount type=bind,source=/media/eric/Hoboken/Projects/Uncertainty\ for\ 6DoF\ Pose\ Est/Models/GDRNPP,target=/home/gdrnpp_bop2022/output/gdrn gdrnpp
+                --mount type=bind,source=/media/eric/Hoboken/Projects/Consensus_Driven_Uncertainty/Datasets/BOP,target=/home/gdrnpp_bop2022/datasets/BOP_DATASETS \
+                --mount type=bind,source=/media/eric/Hoboken/Projects/Consensus_Driven_Uncertainty/Models/GDRNPP,target=/home/gdrnpp_bop2022/output/gdrn gdrnpp
                                     
 sudo docker exec -it gdrnpp-test bash           #  Enter the container.
 
@@ -332,7 +332,7 @@ sudo docker exec -it gdrnpp-test bash           #  Enter the container.
 
 ### HB
 ```
-sudo docker run --rm --shm-size=10gb --runtime=nvidia --gpus all -dit --name gdrnpp-test --mount type=bind,source=/media/eric/Hoboken/Projects/Uncertainty\ for\ 6DoF\ Pose\ Est/Datasets/BOP,target=/home/gdrnpp_bop2022/datasets/BOP_DATASETS --mount type=bind,source=/media/eric/Hoboken/Projects/Uncertainty\ for\ 6DoF\ Pose\ Est/Models/GDRNPP,target=/home/gdrnpp_bop2022/output/gdrn gdrnpp
+sudo docker run --rm --shm-size=10gb --runtime=nvidia --gpus all -dit --name gdrnpp-test --mount type=bind,source=/media/eric/Hoboken/Projects/Consensus_Driven_Uncertainty/Datasets/BOP,target=/home/gdrnpp_bop2022/datasets/BOP_DATASETS --mount type=bind,source=/media/eric/Hoboken/Projects/Consensus_Driven_Uncertainty/Models/GDRNPP,target=/home/gdrnpp_bop2022/output/gdrn gdrnpp
 sudo docker exec -it gdrnpp-test bash
 
 ./core/gdrn_modeling/test_gdrn.sh configs/gdrn/hb_pbr/convnext_a6_AugCosyAAEGray_BG05_mlL1_DMask_amodalClipBox_classAware_hb.py 0 output/gdrn/hb_pbr/convnext_a6_AugCosyAAEGray_BG05_mlL1_DMask_amodalClipBox_classAware_hb/model_final_wo_optim.pth
@@ -357,7 +357,7 @@ sudo docker exec -it gdrnpp-test bash
 
 ### ICBIN
 ```
-sudo docker run --rm --shm-size=10gb --runtime=nvidia --gpus all -dit --name gdrnpp-test --mount type=bind,source=/media/eric/Hoboken/Projects/Uncertainty\ for\ 6DoF\ Pose\ Est/Datasets/BOP,target=/home/gdrnpp_bop2022/datasets/BOP_DATASETS --mount type=bind,source=/media/eric/Hoboken/Projects/Uncertainty\ for\ 6DoF\ Pose\ Est/Models/GDRNPP,target=/home/gdrnpp_bop2022/output/gdrn gdrnpp
+sudo docker run --rm --shm-size=10gb --runtime=nvidia --gpus all -dit --name gdrnpp-test --mount type=bind,source=/media/eric/Hoboken/Projects/Consensus_Driven_Uncertainty/Datasets/BOP,target=/home/gdrnpp_bop2022/datasets/BOP_DATASETS --mount type=bind,source=/media/eric/Hoboken/Projects/Consensus_Driven_Uncertainty/Models/GDRNPP,target=/home/gdrnpp_bop2022/output/gdrn gdrnpp
 sudo docker exec -it gdrnpp-test bash
 
 ./core/gdrn_modeling/test_gdrn.sh configs/gdrn/icbin_pbr/convnext_a6_AugCosyAAEGray_BG05_mlL1_DMask_amodalClipBox_classAware_icbin.py 0 output/gdrn/icbin_pbr/convnext_a6_AugCosyAAEGray_BG05_mlL1_DMask_amodalClipBox_classAware_icbin/model_final_wo_optim.pth
@@ -368,7 +368,7 @@ sudo docker exec -it gdrnpp-test bash
 
 ### ITODD
 ```
-sudo docker run --rm --shm-size=10gb --runtime=nvidia --gpus all -dit --name gdrnpp-test --mount type=bind,source=/media/eric/Hoboken/Projects/Uncertainty\ for\ 6DoF\ Pose\ Est/Datasets/BOP,target=/home/gdrnpp_bop2022/datasets/BOP_DATASETS --mount type=bind,source=/media/eric/Hoboken/Projects/Uncertainty\ for\ 6DoF\ Pose\ Est/Models/GDRNPP,target=/home/gdrnpp_bop2022/output/gdrn gdrnpp
+sudo docker run --rm --shm-size=10gb --runtime=nvidia --gpus all -dit --name gdrnpp-test --mount type=bind,source=/media/eric/Hoboken/Projects/Consensus_Driven_Uncertainty/Datasets/BOP,target=/home/gdrnpp_bop2022/datasets/BOP_DATASETS --mount type=bind,source=/media/eric/Hoboken/Projects/Consensus_Driven_Uncertainty/Models/GDRNPP,target=/home/gdrnpp_bop2022/output/gdrn gdrnpp
 sudo docker exec -it gdrnpp-test bash
 
 ./core/gdrn_modeling/test_gdrn.sh configs/gdrn/itodd_pbr/convnext_a6_AugCosyAAEGray_BG05_mlL1_DMask_amodalClipBox_classAware_itodd.py 0 output/gdrn/itodd_pbr/convnext_a6_AugCosyAAEGray_BG05_mlL1_DMask_amodalClipBox_classAware_itodd/model_final_wo_optim.pth
@@ -405,7 +405,7 @@ sudo docker exec -it gdrnpp-test bash
 
 ### LMO
 ```
-sudo docker run --rm --shm-size=10gb --runtime=nvidia --gpus all -dit --name gdrnpp-test --mount type=bind,source=/media/eric/Hoboken/Projects/Uncertainty\ for\ 6DoF\ Pose\ Est/Datasets/BOP,target=/home/gdrnpp_bop2022/datasets/BOP_DATASETS --mount type=bind,source=/media/eric/Hoboken/Projects/Uncertainty\ for\ 6DoF\ Pose\ Est/Models/GDRNPP,target=/home/gdrnpp_bop2022/output/gdrn gdrnpp
+sudo docker run --rm --shm-size=10gb --runtime=nvidia --gpus all -dit --name gdrnpp-test --mount type=bind,source=/media/eric/Hoboken/Projects/Consensus_Driven_Uncertainty/Datasets/BOP,target=/home/gdrnpp_bop2022/datasets/BOP_DATASETS --mount type=bind,source=/media/eric/Hoboken/Projects/Consensus_Driven_Uncertainty/Models/GDRNPP,target=/home/gdrnpp_bop2022/output/gdrn gdrnpp
 sudo docker exec -it gdrnpp-test bash
 
 ./core/gdrn_modeling/test_gdrn.sh configs/gdrn/lmo_pbr/convnext_a6_AugCosyAAEGray_BG05_mlL1_DMask_amodalClipBox_classAware_lmo.py 0 output/gdrn/lmo_pbr/convnext_a6_AugCosyAAEGray_BG05_mlL1_DMask_amodalClipBox_classAware_lmo/model_final_wo_optim.pth
@@ -428,7 +428,7 @@ The ideal solution would be to *hide* part of TLESS and run tests on the remaini
 But this repo is too over-engineered to allow that. We have to change the config files in the container, too. Very annoying.
 
 ```
-sudo docker run --rm --shm-size=10gb --runtime=nvidia --gpus all -dit --name gdrnpp-test --mount type=bind,source=/media/eric/Hoboken/Projects/Uncertainty\ for\ 6DoF\ Pose\ Est/Datasets/BOP,target=/home/gdrnpp_bop2022/datasets/BOP_DATASETS --mount type=bind,source=/media/eric/Hoboken/Projects/Uncertainty\ for\ 6DoF\ Pose\ Est/Models/GDRNPP,target=/home/gdrnpp_bop2022/output/gdrn gdrnpp
+sudo docker run --rm --shm-size=10gb --runtime=nvidia --gpus all -dit --name gdrnpp-test --mount type=bind,source=/media/eric/Hoboken/Projects/Consensus_Driven_Uncertainty/Datasets/BOP,target=/home/gdrnpp_bop2022/datasets/BOP_DATASETS --mount type=bind,source=/media/eric/Hoboken/Projects/Consensus_Driven_Uncertainty/Models/GDRNPP,target=/home/gdrnpp_bop2022/output/gdrn gdrnpp
 sudo docker exec -it gdrnpp-test bash
 
 ./core/gdrn_modeling/test_gdrn.sh configs/gdrn/tless/convnext_a6_AugCosyAAEGray_BG05_mlL1_DMask_amodalClipBox_classAware_tless.py 0 output/gdrn/tless/convnext_a6_AugCosyAAEGray_BG05_mlL1_DMask_amodalClipBox_classAware_tless/model_final_wo_optim.pth
@@ -469,7 +469,7 @@ sudo docker exec -it gdrnpp-test bash
 
 ### TUDL
 ```
-sudo docker run --rm --shm-size=10gb --runtime=nvidia --gpus all -dit --name gdrnpp-test --mount type=bind,source=/media/eric/Hoboken/Projects/Uncertainty\ for\ 6DoF\ Pose\ Est/Datasets/BOP,target=/home/gdrnpp_bop2022/datasets/BOP_DATASETS --mount type=bind,source=/media/eric/Hoboken/Projects/Uncertainty\ for\ 6DoF\ Pose\ Est/Models/GDRNPP,target=/home/gdrnpp_bop2022/output/gdrn gdrnpp
+sudo docker run --rm --shm-size=10gb --runtime=nvidia --gpus all -dit --name gdrnpp-test --mount type=bind,source=/media/eric/Hoboken/Projects/Consensus_Driven_Uncertainty/Datasets/BOP,target=/home/gdrnpp_bop2022/datasets/BOP_DATASETS --mount type=bind,source=/media/eric/Hoboken/Projects/Consensus_Driven_Uncertainty/Models/GDRNPP,target=/home/gdrnpp_bop2022/output/gdrn gdrnpp
 sudo docker exec -it gdrnpp-test bash
 
 ./core/gdrn_modeling/test_gdrn.sh configs/gdrn/tudl/convnext_a6_AugCosyAAEGray_BG05_mlL1_DMask_amodalClipBox_classAware_tudl.py 0 output/gdrn/tudl/convnext_a6_AugCosyAAEGray_BG05_mlL1_DMask_amodalClipBox_classAware_tudl/model_final_wo_optim.pth
@@ -485,7 +485,7 @@ sudo docker exec -it gdrnpp-test bash
 
 ### YCBV
 ```
-sudo docker run --rm --shm-size=10gb --runtime=nvidia --gpus all -dit --name gdrnpp-test --mount type=bind,source=/media/eric/Hoboken/Projects/Uncertainty\ for\ 6DoF\ Pose\ Est/Datasets/BOP,target=/home/gdrnpp_bop2022/datasets/BOP_DATASETS --mount type=bind,source=/media/eric/Hoboken/Projects/Uncertainty\ for\ 6DoF\ Pose\ Est/Models/GDRNPP,target=/home/gdrnpp_bop2022/output/gdrn gdrnpp
+sudo docker run --rm --shm-size=10gb --runtime=nvidia --gpus all -dit --name gdrnpp-test --mount type=bind,source=/media/eric/Hoboken/Projects/Consensus_Driven_Uncertainty/Datasets/BOP,target=/home/gdrnpp_bop2022/datasets/BOP_DATASETS --mount type=bind,source=/media/eric/Hoboken/Projects/Consensus_Driven_Uncertainty/Models/GDRNPP,target=/home/gdrnpp_bop2022/output/gdrn gdrnpp
 
 sudo docker exec -it gdrnpp-test bash
 
