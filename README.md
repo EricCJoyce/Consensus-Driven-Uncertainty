@@ -5,6 +5,8 @@ Eric C. Joyce, Qianwen Zhao, Nathaniel Burgdorfer, Long Wang, Philippos Mordohai
 
 Accepted to [**IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS) 2025**](https://www.iros25.org/)
 
+[arXiv](https://arxiv.org/abs/2506.20045)
+
 [![Video poster](https://www.ericjoycefilm.com/reel/_2024/consensus-driven-uncertainty/obj/img/poster.jpg)](https://www.ericjoycefilm.com/reel/_2024/consensus-driven-uncertainty/)
 
 ## Predict 6-DoF Object Poses from an RGB Image
